@@ -25,20 +25,20 @@ CREATE TABLE `users`
 DROP TABLE IF EXISTS `vlogs`;
 CREATE TABLE `vlogs`
 (
-    `id`              varchar(24)  NOT NULL,
-    `vlogger_id`      varchar(24)  NOT NULL COMMENT '短视频作者',
-    `url`             varchar(255) NOT NULL COMMENT '短视频播放地址',
-    `cover`           varchar(255) NOT NULL COMMENT '短视频封面',
-    `title`           varchar(128) NOT NULL COMMENT '短视频标题',
-    `width`           int(6)       NOT NULL COMMENT '短视频宽度',
-    `height`          int(6)       NOT NULL COMMENT '短视频高度',
-    `like_counts`     int(12)      NOT NULL COMMENT '点赞总数',
-    `comments_counts` int(12)      NOT NULL COMMENT '评论总数',
-    `is_private`      tinyint(2)   NOT NULL COMMENT '是否私密',
-    `create_time`     datetime     NOT NULL COMMENT '创建时间',
-    `modify_time`     datetime     NOT NULL COMMENT '更新时间',
-    `creator`         varchar(24)  NOT NULL COMMENT '创建人',
-    `modifier`        varchar(24)  NOT NULL COMMENT '修改人',
+    `id`             varchar(24)  NOT NULL,
+    `vlogger_id`     varchar(24)  NOT NULL COMMENT '短视频作者',
+    `url`            varchar(255) NOT NULL COMMENT '短视频播放地址',
+    `cover`          varchar(255) NOT NULL COMMENT '短视频封面',
+    `title`          varchar(128) NOT NULL COMMENT '短视频标题',
+    `width`          int(6)       NOT NULL COMMENT '短视频宽度',
+    `height`         int(6)       NOT NULL COMMENT '短视频高度',
+    `like_counts`    int(12)      NOT NULL COMMENT '点赞总数',
+    `comment_counts` int(12)      NOT NULL COMMENT '评论总数',
+    `is_private`     tinyint(2)   NOT NULL COMMENT '是否私密',
+    `create_time`    datetime     NOT NULL COMMENT '创建时间',
+    `modify_time`    datetime     NOT NULL COMMENT '更新时间',
+    `creator`        varchar(24)  NOT NULL COMMENT '创建人',
+    `modifier`       varchar(24)  NOT NULL COMMENT '修改人',
     PRIMARY KEY (`id`)
 ) COMMENT ='短视频表';
 
@@ -73,8 +73,8 @@ CREATE TABLE `fans`
     UNIQUE KEY `uniq_vlogger_fan_id` (`vlogger_id`, `fan_id`)
 ) COMMENT ='粉丝关联表';
 
-DROP TABLE IF EXISTS `like_vlog`;
-CREATE TABLE `like_vlog`
+DROP TABLE IF EXISTS `like_vlogs`;
+CREATE TABLE `like_vlogs`
 (
     `id`          varchar(24) NOT NULL,
     `user_id`     varchar(24) NOT NULL COMMENT '用户id',
