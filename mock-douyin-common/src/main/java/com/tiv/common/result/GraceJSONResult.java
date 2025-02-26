@@ -1,7 +1,9 @@
 package com.tiv.common.result;
 
 import com.tiv.common.enums.ResponseStatusEnum;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Map;
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tiv.mapper.FansMapper">
+    <resultMap id="BaseResultMap" type="com.tiv.model.pojo.Fans">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="vlogger_id" property="vloggerId" jdbcType="VARCHAR"/>
+        <result column="fan_id" property="fanId" jdbcType="VARCHAR"/>
+        <result column="is_friend" property="isFriend" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="modifier" property="modifier" jdbcType="VARCHAR"/>
+    </resultMap>
+</mapper>
