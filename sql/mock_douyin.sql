@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`
 (
     `id`          varchar(24)  NOT NULL,
-    `mail`        varchar(32)  NOT NULL COMMENT '邮箱号',
+    `email`        varchar(32)  NOT NULL COMMENT '邮箱号',
     `password`    varchar(32)  NOT NULL COMMENT '密码',
     `nickname`    varchar(24)  NOT NULL COMMENT '昵称',
     `uid`         varchar(24)  NOT NULL COMMENT '唯一标识,可以付费修改',
@@ -20,7 +20,7 @@ CREATE TABLE `users`
     `creator`     varchar(24)  NOT NULL COMMENT '创建人',
     `modifier`    varchar(24)  NOT NULL COMMENT '修改人',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `uniq_mail` (`mail`)
+    UNIQUE KEY `uniq_email` (`email`)
 ) COMMENT ='用户表';
 
 DROP TABLE IF EXISTS `vlogs`;

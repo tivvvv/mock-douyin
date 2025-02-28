@@ -18,7 +18,7 @@
     </properties>
 
     <dependencies>
-        <!-- SpringBoot依赖-->
+        <!-- SpringBoot依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -91,11 +91,10 @@
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
         </dependency>
-        <!-- 第三方云厂商相关的依赖 -->
+        <!-- SpringBoot邮件 -->
         <dependency>
-            <groupId>com.tencentcloudapi</groupId>
-            <artifactId>tencentcloud-sdk-java</artifactId>
-            <version>3.1.270</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
     </dependencies>
 

@@ -17,3 +17,10 @@ spring:
       pool-name: DataSourceHikariCP           # 连接池的名字
       max-lifetime: 18000000                  # 连接池的最大生命时长/ms,超时则会被释放
       connection-test-query: SELECT 1
+  mail:
+    host: smtp.163.com
+    username: 发送邮箱
+    password: 授权码
+    port: 25
+    default-encoding: UTF-8
+    protocol: smtp
