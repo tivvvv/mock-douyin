@@ -27,7 +27,12 @@ public class Users {
     /**
      * 手机号
      */
-    private String mobile;
+    private String mail;
+
+    /**
+     * 密码
+     */
+    private String password;
 
     /**
      * 昵称
