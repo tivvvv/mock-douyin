@@ -71,7 +71,7 @@ public class GraceJSONResult {
      * @param map
      * @return
      */
-    public static GraceJSONResult errorMap(Map<Object, Object> map) {
+    public static GraceJSONResult errorMap(Map<String, String> map) {
         return new GraceJSONResult(ResponseStatusEnum.FAILED, map);
     }
 
