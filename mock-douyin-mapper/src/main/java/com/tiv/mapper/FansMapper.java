@@ -1,7 +1,7 @@
 package com.tiv.mapper;
 
-import com.tiv.mapper.my.MyMapper;
 import com.tiv.model.pojo.Fans;
+import com.tiv.my.MyMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository

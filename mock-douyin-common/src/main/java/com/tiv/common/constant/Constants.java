@@ -5,6 +5,11 @@ package com.tiv.common.constant;
  */
 public interface Constants {
 
-    public static final String IP_PREFIX = "ip_";
-    public static final String VERIFY_CODE_PREFIX = "verify_code_";
+    String IP_PREFIX = "ip_";
+
+    String VERIFY_CODE_PREFIX = "verify_code_";
+
+    String USER_TOKEN_PREFIX = "user_token_";
+
+    String USER_FACE_URI = "";
 }

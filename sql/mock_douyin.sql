@@ -2,8 +2,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`
 (
     `id`          varchar(24)  NOT NULL,
-    `email`        varchar(32)  NOT NULL COMMENT '邮箱号',
-    `password`    varchar(32)  NOT NULL COMMENT '密码',
+    `email`       varchar(32)  NOT NULL COMMENT '邮箱号',
     `nickname`    varchar(24)  NOT NULL COMMENT '昵称',
     `uid`         varchar(24)  NOT NULL COMMENT '唯一标识,可以付费修改',
     `face`        varchar(128) NOT NULL COMMENT '头像',

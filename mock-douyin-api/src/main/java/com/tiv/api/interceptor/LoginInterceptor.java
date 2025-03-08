@@ -21,7 +21,7 @@ public class LoginInterceptor extends BaseController implements HandlerIntercept
         String ip = IPUtil.getRequestIp(request);
         boolean keyExisted = redis.keyIsExist(Constants.IP_PREFIX + ip);
         if (keyExisted) {
-            throw new GraceException(ResponseStatusEnum.SMS_NEED_WAIT_ERROR);
+            throw new GraceException(ResponseStatusEnum.EMAIL_NEED_WAIT_ERROR);
         }
         return true;
     }

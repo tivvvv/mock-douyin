@@ -28,3 +28,12 @@ spring:
     host: 192.168.1.1
     port: 6379
     database: 0
+
+mybatis:
+  type-aliases-package: com.tiv.model.pojo
+  mapper-locations: classpath:mapper/*.xml
+
+mapper:
+  mappers: com.tiv.my.MyMapper
+  not-empty: false
+  identity: MYSQL

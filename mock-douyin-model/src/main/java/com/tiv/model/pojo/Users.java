@@ -25,14 +25,9 @@ public class Users {
     private String id;
 
     /**
-     * 手机号
+     * 邮箱
      */
-    private String mail;
-
-    /**
-     * 密码
-     */
-    private String password;
+    private String email;
 
     /**
      * 昵称
