@@ -68,6 +68,13 @@ public class RegisterController extends BaseController {
         return GraceJSONResult.ok();
     }
 
+    /**
+     * 登录
+     *
+     * @param loginBO
+     * @param request
+     * @return
+     */
     @PostMapping("/login")
     public GraceJSONResult login(@Valid @RequestBody LoginBO loginBO, HttpServletRequest request) {
 
@@ -99,5 +106,18 @@ public class RegisterController extends BaseController {
         userVO.setUserToken(userToken);
 
         return GraceJSONResult.ok(userVO);
+    }
+
+    /**
+     * 登出
+     *
+     * @param userId
+     * @param request
+     * @return
+     */
+    @PostMapping("/logout")
+    public GraceJSONResult logout(@RequestParam String userId, HttpServletRequest request) {
+        redis.del(Constants.USER_TOKEN_PREFIX + userId);
+        return GraceJSONResult.ok();
     }
 }
