@@ -34,4 +34,8 @@ public class UsersVO {
 
     private String userToken;
 
+    private Integer followsCount;
+    private Integer fansCount;
+    private Integer myLikesCount;
+
 }

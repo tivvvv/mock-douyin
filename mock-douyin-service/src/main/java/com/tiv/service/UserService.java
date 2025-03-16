@@ -19,4 +19,12 @@ public interface UserService {
      * @return
      */
     Users createUser(String email);
+
+    /**
+     * 根据用户id获取用户
+     *
+     * @param userId
+     * @return
+     */
+    Users getUser(String userId);
 }

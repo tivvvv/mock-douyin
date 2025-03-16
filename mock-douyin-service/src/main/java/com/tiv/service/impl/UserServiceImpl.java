@@ -32,6 +32,11 @@ public class UserServiceImpl implements UserService {
         return usersMapper.selectOneByExample(userExample);
     }
 
+    @Override
+    public Users getUser(String userId) {
+        return usersMapper.selectByPrimaryKey(userId);
+    }
+
     @Transactional
     @Override
     public Users createUser(String email) {

@@ -11,5 +11,11 @@ public interface Constants {
 
     String USER_TOKEN_PREFIX = "user_token_";
 
+    String FOLLOWS_COUNTS_PREFIX = "follows_counts_";
+
+    String FANS_COUNTS_PREFIX = "fans_counts_";
+
+    String MY_LIKES_COUNTS_PREFIX = "my_likes_counts_";
+
     String USER_FACE_URI = "";
 }
