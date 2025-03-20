@@ -17,5 +17,11 @@ public interface Constants {
 
     String MY_LIKES_COUNTS_PREFIX = "my_likes_counts_";
 
+    String UPDATE_UID_PREFIX = "update_uid_";
+
     String USER_FACE_URI = "";
+
+    String NICKNAME = "nickname";
+
+    String UID = "uid";
 }

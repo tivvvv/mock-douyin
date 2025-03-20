@@ -12,10 +12,10 @@ public enum SexEnum {
     man(1, "男"),
     secret(2, "保密");
 
-    private final Integer type;
+    private final int type;
     private final String value;
 
-    SexEnum(Integer type, String value) {
+    SexEnum(int type, String value) {
         this.type = type;
         this.value = value;
     }

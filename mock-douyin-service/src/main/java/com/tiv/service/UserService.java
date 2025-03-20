@@ -1,5 +1,6 @@
 package com.tiv.service;
 
+import com.tiv.model.bo.UpdateUserBO;
 import com.tiv.model.pojo.Users;
 
 public interface UserService {
@@ -27,4 +28,21 @@ public interface UserService {
      * @return
      */
     Users getUser(String userId);
+
+    /**
+     * 修改用户信息
+     *
+     * @param updateUserBO
+     * @return
+     */
+    Users updateUser(UpdateUserBO updateUserBO);
+
+    /**
+     * 修改用户信息
+     *
+     * @param updateUserBO
+     * @param type
+     * @return
+     */
+    Users updateUser(UpdateUserBO updateUserBO, Integer type);
 }
