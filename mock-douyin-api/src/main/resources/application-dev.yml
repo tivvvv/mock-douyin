@@ -37,3 +37,12 @@ mapper:
   mappers: com.tiv.my.MyMapper
   not-empty: false
   identity: MYSQL
+
+minio:
+  endpoint: http://127.0.0.1:9000
+  fileHost: http://127.0.0.1:9000
+  bucketName: mock-douyin
+  accessKey: root
+  secretKey: rootroot
+  imgSize: 1024
+  fileSize: 1024

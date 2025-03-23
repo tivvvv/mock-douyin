@@ -31,7 +31,7 @@ public class MinIOUtil {
     private static String secretKey;
     private static Integer imgSize;
     private static Integer fileSize;
-    
+
     private static final String SEPARATOR = "/";
 
     public MinIOUtil() {
@@ -75,7 +75,7 @@ public class MinIOUtil {
     public static String getBasisUrl() {
         return endpoint + SEPARATOR + bucketName + SEPARATOR;
     }
-    
+
     /**
      * 启动SpringBoot容器的时候初始化Bucket
      * 如果没有Bucket则创建
@@ -115,7 +115,7 @@ public class MinIOUtil {
                 );
         return bucketPolicy;
     }
-    
+
     /**
      * 获得所有Bucket列表
      *
@@ -146,7 +146,7 @@ public class MinIOUtil {
     public static void removeBucket(String bucketName) throws Exception {
         minioClient.removeBucket(RemoveBucketArgs.builder().bucket(bucketName).build());
     }
-    
+
     /**
      * 判断文件是否存在
      *
