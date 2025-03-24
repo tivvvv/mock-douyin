@@ -19,7 +19,7 @@ public interface Constants {
 
     String UPDATE_UID_PREFIX = "update_uid_";
 
-    String USER_FACE_URI = "";
+    String USER_FACE_URI = "http://127.0.0.1:9000/mock-douyin/流萤头像.jpg";
 
     String NICKNAME = "nickname";
 

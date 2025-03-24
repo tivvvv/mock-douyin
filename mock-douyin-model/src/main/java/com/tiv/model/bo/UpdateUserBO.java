@@ -18,7 +18,9 @@ public class UpdateUserBO {
 
     private String nickname;
     private String uid;
+    private String face;
     private Integer sex;
     private Date birthday;
     private String description;
+    private String bgImg;
 }
