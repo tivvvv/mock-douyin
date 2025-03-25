@@ -84,7 +84,7 @@ public class RegisterController extends BaseController {
         // 校验验证码是否匹配
         String redisCode = redis.get(Constants.VERIFY_CODE_PREFIX + email);
         if (StringUtils.isBlank(redisCode) || !redisCode.equalsIgnoreCase(code)) {
-            return GraceJSONResult.errorCustom(ResponseStatusEnum.CODE_ERROR);
+            return GraceJSONResult.exception(ResponseStatusEnum.CODE_ERROR);
         }
 
         // 查询用户是否存在

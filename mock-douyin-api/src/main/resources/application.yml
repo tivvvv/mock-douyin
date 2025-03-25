@@ -9,8 +9,8 @@ spring:
     location: classpath:banner/banner.txt
   servlet:
     multipart:
-      max-file-size: 2MB # 文件上传大小限制,设置最大值,超过该值报错
-      max-request-size: 2MB # 文件最大请求限制,用于批量上传
+      max-file-size: 5MB # 文件上传大小限制
+      max-request-size: 5MB # 文件最大请求限制
 
 # 日志级别
 logging:

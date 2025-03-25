@@ -8,7 +8,6 @@ import com.tiv.common.result.GraceJSONResult;
 import com.tiv.model.bo.UpdateUserBO;
 import com.tiv.model.pojo.Users;
 import com.tiv.service.UserService;
-import com.tiv.service.impl.UserServiceImpl;
 import com.tiv.service.utils.MinIOUtil;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;

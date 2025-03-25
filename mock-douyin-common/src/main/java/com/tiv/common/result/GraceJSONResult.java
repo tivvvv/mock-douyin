@@ -85,16 +85,6 @@ public class GraceJSONResult {
     }
 
     /**
-     * 自定义错误返回
-     *
-     * @param responseStatus
-     * @return
-     */
-    public static GraceJSONResult errorCustom(ResponseStatusEnum responseStatus) {
-        return new GraceJSONResult(responseStatus);
-    }
-
-    /**
      * 异常返回
      *
      * @param responseStatus

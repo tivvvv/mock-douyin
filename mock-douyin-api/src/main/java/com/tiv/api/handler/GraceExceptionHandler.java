@@ -1,5 +1,6 @@
 package com.tiv.api.handler;
 
+import com.tiv.common.enums.ResponseStatusEnum;
 import com.tiv.common.exception.GraceException;
 import com.tiv.common.result.GraceJSONResult;
 import org.springframework.validation.BindingResult;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +32,13 @@ public class GraceExceptionHandler {
     public GraceJSONResult returnGraceException(GraceException e) {
         e.printStackTrace();
         return GraceJSONResult.exception(e.getResponseStatusEnum());
+    }
+
+    @ResponseBody
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public GraceJSONResult returnMaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
+        e.printStackTrace();
+        return GraceJSONResult.exception(ResponseStatusEnum.FILE_MAX_SIZE_5MB_ERROR);
     }
 
     /**
