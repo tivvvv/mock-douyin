@@ -4,8 +4,8 @@ server:
 spring:
   datasource: # 数据源的相关配置
     type: com.zaxxer.hikari.HikariDataSource      # 数据源的类型
-    driver-class-name: com.mysql.jdbc.Driver      # mysql数据库驱动类名称
-    url: jdbc:mysql://192.168.1.1:3306/mock_douyin?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    driver-class-name: com.mysql.cj.jdbc.Driver     # mysql数据库驱动类名称
+    url: jdbc:mysql://192.168.1.1:3306/mock_douyin?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
     username: root
     password: root
     hikari:
