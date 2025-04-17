@@ -2,22 +2,31 @@ package com.tiv.service.impl;
 
 import com.tiv.common.enums.YesOrNoEnum;
 import com.tiv.mapper.VlogsMapper;
+import com.tiv.mapper.VlogsMapperCustom;
 import com.tiv.model.bo.VlogBO;
 import com.tiv.model.pojo.Vlogs;
+import com.tiv.model.vo.IndexVlogVO;
 import com.tiv.service.VlogService;
 import com.tiv.service.utils.idworker.Sid;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class VlogServiceImpl implements VlogService {
 
     @Autowired
     private VlogsMapper vlogsMapper;
+
+    @Autowired
+    private VlogsMapperCustom vlogsMapperCustom;
 
     @Autowired
     private Sid sid;
@@ -40,5 +49,14 @@ public class VlogServiceImpl implements VlogService {
         vlog.setModifier(vlogBO.getVloggerId());
 
         vlogsMapper.insert(vlog);
+    }
+
+    @Override
+    public List<IndexVlogVO> getIndexVlogList(String search) {
+        Map<String, Object> map = new HashMap<>();
+        if (StringUtils.isNotBlank(search)) {
+            map.put("search", search);
+        }
+        return vlogsMapperCustom.getIndexVlogList(map);
     }
 }
