@@ -16,3 +16,8 @@ spring:
 logging:
   level:
     root: info
+
+# 分页插件助手的配置
+pagehelper:
+  helper-dialect: MYSQL
+  support-methods-arguments: true

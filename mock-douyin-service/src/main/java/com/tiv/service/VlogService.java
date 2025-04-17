@@ -1,9 +1,8 @@
 package com.tiv.service;
 
+import com.tiv.common.result.PagedResult;
 import com.tiv.model.bo.VlogBO;
 import com.tiv.model.vo.IndexVlogVO;
-
-import java.util.List;
 
 public interface VlogService {
 
@@ -15,10 +14,12 @@ public interface VlogService {
     void createVlog(VlogBO vlogBO);
 
     /**
-     * 查询短视频列表
+     * 分页查询短视频列表
      *
      * @param search
+     * @param page
+     * @param pageSize
      * @return
      */
-    List<IndexVlogVO> getIndexVlogList(String search);
+    PagedResult<IndexVlogVO> getIndexVlogList(String search, Integer page, Integer pageSize);
 }

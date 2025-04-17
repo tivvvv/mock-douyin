@@ -1,12 +1,15 @@
 package com.tiv.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.tiv.common.enums.YesOrNoEnum;
+import com.tiv.common.result.PagedResult;
 import com.tiv.mapper.VlogsMapper;
 import com.tiv.mapper.VlogsMapperCustom;
 import com.tiv.model.bo.VlogBO;
 import com.tiv.model.pojo.Vlogs;
 import com.tiv.model.vo.IndexVlogVO;
 import com.tiv.service.VlogService;
+import com.tiv.service.base.BaseInfoProperties;
 import com.tiv.service.utils.idworker.Sid;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -20,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class VlogServiceImpl implements VlogService {
+public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
 
     @Autowired
     private VlogsMapper vlogsMapper;
@@ -52,11 +55,13 @@ public class VlogServiceImpl implements VlogService {
     }
 
     @Override
-    public List<IndexVlogVO> getIndexVlogList(String search) {
+    public PagedResult<IndexVlogVO> getIndexVlogList(String search, Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
         Map<String, Object> map = new HashMap<>();
         if (StringUtils.isNotBlank(search)) {
             map.put("search", search);
         }
-        return vlogsMapperCustom.getIndexVlogList(map);
+        List<IndexVlogVO> list = vlogsMapperCustom.getIndexVlogList(map);
+        return buildPagedResult(list, page);
     }
 }

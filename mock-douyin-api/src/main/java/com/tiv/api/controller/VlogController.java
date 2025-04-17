@@ -1,5 +1,6 @@
 package com.tiv.api.controller;
 
+import com.tiv.common.constant.Constants;
 import com.tiv.common.result.GraceJSONResult;
 import com.tiv.model.bo.VlogBO;
 import com.tiv.service.VlogService;
@@ -24,7 +25,15 @@ public class VlogController {
     }
 
     @GetMapping("/indexList")
-    public GraceJSONResult indexList(@RequestParam(defaultValue = "") String search) {
-        return GraceJSONResult.ok(vlogService.getIndexVlogList(search));
+    public GraceJSONResult indexList(@RequestParam(defaultValue = "") String search,
+                                     @RequestParam Integer page,
+                                     @RequestParam Integer pageSize) {
+        if (page == null) {
+            page = Constants.DEFAULT_START_PAGE;
+        }
+        if (pageSize == null) {
+            pageSize = Constants.DEFAULT_PAGE_SIZE;
+        }
+        return GraceJSONResult.ok(vlogService.getIndexVlogList(search, page, pageSize));
     }
 }
