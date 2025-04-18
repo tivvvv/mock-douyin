@@ -24,10 +24,34 @@
         WHERE
         v.is_private = 0
         <if test="paramMap.search != null and paramMap.search != ''">
-            AND v.title like '%${paramMap.search}%'
+            AND v.title like CONCAT('%', #{paramMap.search}, '%')
         </if>
         ORDER BY
         v.create_time
         DESC
+    </select>
+
+    <select id="getVlogDetailById" parameterType="map" resultType="com.tiv.model.vo.IndexVlogVO">
+        SELECT
+        v.id as vlogId,
+        v.vlogger_id as vloggerId,
+        u.face as vloggerFace,
+        u.nickname as vloggerName,
+        v.title as content,
+        v.url as url,
+        v.cover as cover,
+        v.width as width,
+        v.height as height,
+        v.like_counts as likeCounts,
+        v.comment_counts as commentsCounts,
+        v.is_private as isPrivate
+        FROM
+        vlogs v
+        LEFT JOIN
+        users u
+        ON
+        v.vlogger_id = u.id
+        WHERE
+        v.id = #{paramMap.vlogId}
     </select>
 </mapper>

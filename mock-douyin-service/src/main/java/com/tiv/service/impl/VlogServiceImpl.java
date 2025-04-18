@@ -16,6 +16,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -63,5 +64,19 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
         }
         List<IndexVlogVO> list = vlogsMapperCustom.getIndexVlogList(map);
         return buildPagedResult(list, page);
+    }
+
+    @Override
+    public IndexVlogVO getVlogDetailById(String userId, String vlogId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("vlogId", vlogId);
+
+        List<IndexVlogVO> list = vlogsMapperCustom.getVlogDetailById(map);
+
+        if (!CollectionUtils.isEmpty(list)) {
+            return list.get(0);
+        }
+
+        return null;
     }
 }

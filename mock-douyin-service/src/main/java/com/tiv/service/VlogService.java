@@ -22,4 +22,13 @@ public interface VlogService {
      * @return
      */
     PagedResult<IndexVlogVO> getIndexVlogList(String search, Integer page, Integer pageSize);
+
+    /**
+     * 查询短视频详情
+     *
+     * @param userId
+     * @param vlogId
+     * @return
+     */
+    IndexVlogVO getVlogDetailById(String userId, String vlogId);
 }

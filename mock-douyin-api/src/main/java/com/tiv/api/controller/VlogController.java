@@ -30,4 +30,11 @@ public class VlogController {
                                      @RequestParam(defaultValue = "10") Integer pageSize) {
         return GraceJSONResult.ok(vlogService.getIndexVlogList(search, page, pageSize));
     }
+
+    @GetMapping("/detail")
+    public GraceJSONResult detail(@RequestParam(defaultValue = "") String userId,
+                                  @RequestParam String vlogId) {
+        return GraceJSONResult.ok(vlogService.getVlogDetailById(userId, vlogId));
+    }
+
 }
