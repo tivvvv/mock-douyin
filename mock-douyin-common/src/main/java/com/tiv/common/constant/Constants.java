@@ -24,8 +24,4 @@ public interface Constants {
     String NICKNAME = "nickname";
 
     String UID = "uid";
-
-    int DEFAULT_START_PAGE = 1;
-
-    int DEFAULT_PAGE_SIZE = 10;
 }

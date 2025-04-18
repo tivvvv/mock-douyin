@@ -26,14 +26,8 @@ public class VlogController {
 
     @GetMapping("/indexList")
     public GraceJSONResult indexList(@RequestParam(defaultValue = "") String search,
-                                     @RequestParam Integer page,
-                                     @RequestParam Integer pageSize) {
-        if (page == null) {
-            page = Constants.DEFAULT_START_PAGE;
-        }
-        if (pageSize == null) {
-            pageSize = Constants.DEFAULT_PAGE_SIZE;
-        }
+                                     @RequestParam(defaultValue = "1") Integer page,
+                                     @RequestParam(defaultValue = "10") Integer pageSize) {
         return GraceJSONResult.ok(vlogService.getIndexVlogList(search, page, pageSize));
     }
 }
