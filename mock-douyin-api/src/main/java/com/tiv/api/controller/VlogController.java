@@ -1,6 +1,5 @@
 package com.tiv.api.controller;
 
-import com.tiv.common.constant.Constants;
 import com.tiv.common.result.GraceJSONResult;
 import com.tiv.model.bo.VlogBO;
 import com.tiv.service.VlogService;
@@ -35,6 +34,14 @@ public class VlogController {
     public GraceJSONResult detail(@RequestParam(defaultValue = "") String userId,
                                   @RequestParam String vlogId) {
         return GraceJSONResult.ok(vlogService.getVlogDetailById(userId, vlogId));
+    }
+
+    @PostMapping("/changePrivate")
+    public GraceJSONResult publish(@RequestParam String userId,
+                                   @RequestParam String vlogId,
+                                   @RequestParam Integer isPrivate) {
+        vlogService.changePrivate(userId, vlogId, isPrivate);
+        return GraceJSONResult.ok();
     }
 
 }

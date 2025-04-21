@@ -31,4 +31,13 @@ public interface VlogService {
      * @return
      */
     IndexVlogVO getVlogDetailById(String userId, String vlogId);
+
+    /**
+     * 设置短视频私密/公开
+     *
+     * @param userId
+     * @param vlogId
+     * @param isPrivate
+     */
+    void changePrivate(String userId, String vlogId, Integer isPrivate);
 }
