@@ -2,6 +2,7 @@ package com.tiv.service;
 
 import com.tiv.common.result.PagedResult;
 import com.tiv.model.bo.VlogBO;
+import com.tiv.model.pojo.Vlogs;
 import com.tiv.model.vo.IndexVlogVO;
 
 public interface VlogService {
@@ -40,4 +41,15 @@ public interface VlogService {
      * @param isPrivate
      */
     void changePrivate(String userId, String vlogId, Integer isPrivate);
+
+    /**
+     * 分页查询我的短视频列表
+     *
+     * @param userId
+     * @param isPrivate
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    PagedResult<Vlogs> queryMyVlogList(String userId, Integer isPrivate, Integer page, Integer pageSize);
 }

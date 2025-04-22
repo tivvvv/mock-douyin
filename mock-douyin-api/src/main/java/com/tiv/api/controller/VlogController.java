@@ -44,4 +44,12 @@ public class VlogController {
         return GraceJSONResult.ok();
     }
 
+    @GetMapping()
+    public GraceJSONResult myVlogList(@RequestParam String userId,
+                                      @RequestParam Integer isPrivate,
+                                      @RequestParam(defaultValue = "1") Integer page,
+                                      @RequestParam(defaultValue = "10") Integer pageSize) {
+        return GraceJSONResult.ok(vlogService.queryMyVlogList(userId, isPrivate, page, pageSize));
+    }
+
 }
