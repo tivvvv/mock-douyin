@@ -17,4 +17,13 @@ public interface FanService {
      * @param vloggerId
      */
     void doCancel(String userId, String vloggerId);
+
+    /**
+     * 查询是否已关注
+     *
+     * @param userId
+     * @param vloggerId
+     * @return
+     */
+    boolean queryFollowStatus(String userId, String vloggerId);
 }

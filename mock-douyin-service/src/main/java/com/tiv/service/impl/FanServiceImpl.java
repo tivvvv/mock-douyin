@@ -4,6 +4,7 @@ import com.tiv.common.enums.YesOrNoEnum;
 import com.tiv.mapper.FansMapper;
 import com.tiv.model.pojo.Fans;
 import com.tiv.service.FanService;
+import com.tiv.service.utils.RedisUtil;
 import com.tiv.service.utils.idworker.Sid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,8 @@ public class FanServiceImpl implements FanService {
 
     @Autowired
     private Sid sid;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
     public void doFollow(String userId, String vloggerId) {
@@ -62,6 +65,11 @@ public class FanServiceImpl implements FanService {
         }
 
         fansMapper.delete(fan);
+    }
+
+    @Override
+    public boolean queryFollowStatus(String userId, String vloggerId) {
+        return queryFanRelationship(userId, vloggerId) != null;
     }
 
     private Fans queryFanRelationship(String fanId, String vloggerId) {

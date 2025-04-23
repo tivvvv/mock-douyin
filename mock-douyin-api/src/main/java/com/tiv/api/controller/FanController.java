@@ -11,10 +11,7 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api
 @Slf4j
@@ -67,6 +64,15 @@ public class FanController {
         redisUtil.del(Constants.FAN_REL_VLOGGER_PREFIX + userId + ":" + vloggerId);
 
         return GraceJSONResult.ok();
+    }
+
+    @GetMapping("/queryFollowStatus")
+    public GraceJSONResult queryFollowStatus(@RequestParam String userId, @RequestParam String vloggerId) {
+        if (StringUtils.isBlank(userId) || StringUtils.isBlank(vloggerId) || userId.equalsIgnoreCase(vloggerId)) {
+            return GraceJSONResult.exception(ResponseStatusEnum.SYSTEM_PARAM_ERROR);
+        }
+        boolean isFollow = fanService.queryFollowStatus(userId, vloggerId);
+        return GraceJSONResult.ok(isFollow);
     }
 
 }
