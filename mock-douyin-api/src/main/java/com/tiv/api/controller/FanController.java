@@ -1,10 +1,12 @@
 package com.tiv.api.controller;
 
+import com.tiv.common.constant.Constants;
 import com.tiv.common.enums.ResponseStatusEnum;
 import com.tiv.common.result.GraceJSONResult;
 import com.tiv.model.pojo.Users;
 import com.tiv.service.FanService;
 import com.tiv.service.UserService;
+import com.tiv.service.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +27,8 @@ public class FanController {
 
     @Autowired
     private FanService fanService;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @PostMapping("/follow")
     public GraceJSONResult follow(@RequestParam String userId, @RequestParam String vloggerId) {
@@ -40,6 +44,14 @@ public class FanController {
         }
 
         fanService.doFollow(userId, vloggerId);
+
+        // 我的关注数+1
+        redisUtil.increment(Constants.MY_FOLLOWS_COUNTS_PREFIX + userId, 1);
+        // 博主粉丝数+1
+        redisUtil.increment(Constants.MY_FANS_COUNTS_PREFIX + vloggerId, 1);
+        // 关注关系
+        redisUtil.set(Constants.FAN_REL_VLOGGER_PREFIX + userId + ":" + vloggerId, "1");
+
         return GraceJSONResult.ok();
     }
 }

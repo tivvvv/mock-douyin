@@ -17,6 +17,12 @@ public interface Constants {
 
     String MY_LIKES_COUNTS_PREFIX = "my_likes_counts_";
 
+    String MY_FOLLOWS_COUNTS_PREFIX = "my_follows_counts_";
+
+    String MY_FANS_COUNTS_PREFIX = "my_fans_counts_";
+
+    String FAN_REL_VLOGGER_PREFIX = "fan_rel_vlogger_";
+
     String UPDATE_UID_PREFIX = "update_uid_";
 
     String USER_FACE_URI = "http://127.0.0.1:9000/mock-douyin/流萤头像.jpg";
