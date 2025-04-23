@@ -5,8 +5,11 @@ import com.tiv.mapper.FansMapper;
 import com.tiv.model.pojo.Fans;
 import com.tiv.service.FanService;
 import com.tiv.service.utils.idworker.Sid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
@@ -15,6 +18,7 @@ import java.util.List;
 @Service
 public class FanServiceImpl implements FanService {
 
+    private static final Logger log = LoggerFactory.getLogger(FanServiceImpl.class);
     @Autowired
     private FansMapper fansMapper;
 
@@ -38,6 +42,26 @@ public class FanServiceImpl implements FanService {
             fans.setIsFriend(YesOrNoEnum.NO.type);
         }
         fansMapper.insert(fans);
+    }
+
+    @Transactional
+    @Override
+    public void doCancel(String userId, String vloggerId) {
+        Fans fan = queryFanRelationship(userId, vloggerId);
+        if (fan == null) {
+            return;
+        }
+        if (fan.getIsFriend() == YesOrNoEnum.YES.type) {
+            Fans pendingVlogger = queryFanRelationship(vloggerId, userId);
+            if (pendingVlogger == null) {
+                log.error("fanId:{} vloggerId:{}关系错误,vlogger不存在", userId, vloggerId);
+                return;
+            }
+            pendingVlogger.setIsFriend(YesOrNoEnum.NO.type);
+            fansMapper.updateByPrimaryKeySelective(pendingVlogger);
+        }
+
+        fansMapper.delete(fan);
     }
 
     private Fans queryFanRelationship(String fanId, String vloggerId) {

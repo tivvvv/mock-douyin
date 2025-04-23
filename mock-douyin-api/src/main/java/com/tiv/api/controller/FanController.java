@@ -54,4 +54,19 @@ public class FanController {
 
         return GraceJSONResult.ok();
     }
+
+    @PostMapping("/unfollow")
+    public GraceJSONResult unfollow(@RequestParam String userId, @RequestParam String vloggerId) {
+        if (StringUtils.isBlank(userId) || StringUtils.isBlank(vloggerId) || userId.equalsIgnoreCase(vloggerId)) {
+            return GraceJSONResult.exception(ResponseStatusEnum.SYSTEM_PARAM_ERROR);
+        }
+        fanService.doCancel(userId, vloggerId);
+
+        redisUtil.decrement(Constants.MY_FOLLOWS_COUNTS_PREFIX + userId, 1);
+        redisUtil.decrement(Constants.MY_FANS_COUNTS_PREFIX + vloggerId, 1);
+        redisUtil.del(Constants.FAN_REL_VLOGGER_PREFIX + userId + ":" + vloggerId);
+
+        return GraceJSONResult.ok();
+    }
+
 }

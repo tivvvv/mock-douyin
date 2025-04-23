@@ -9,4 +9,12 @@ public interface FanService {
      * @param vloggerId
      */
     void doFollow(String userId, String vloggerId);
+
+    /**
+     * 取关
+     *
+     * @param userId
+     * @param vloggerId
+     */
+    void doCancel(String userId, String vloggerId);
 }
