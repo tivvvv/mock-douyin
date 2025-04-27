@@ -4,19 +4,38 @@
 
     <select id="getFollows" resultType="com.tiv.model.vo.VloggerVO" parameterType="map">
         SELECT
-        u.id as vloggerId,
-        u.nickname as nickname,
-        u.face as face,
-        u.sex as sex
+            u.id as vloggerId,
+            u.nickname as nickname,
+            u.face as face,
+            u.sex as sex
         FROM
-        fans f
+            fans f
         LEFT JOIN
-        users u
+            users u
         ON
-        f.vlogger_id = u.id
+            f.vlogger_id = u.id
         WHERE
-        f.fan_id = #{paramMap.userId}
+            f.fan_id = #{paramMap.userId}
         ORDER BY
-        u.nickname ASC
+            u.nickname ASC
+    </select>
+
+    <select id="getFans" resultType="com.tiv.model.vo.FanVO" parameterType="map">
+        SELECT
+            u.id as fanId,
+            u.nickname as nickname,
+            u.face as face,
+            u.sex as sex,
+            f.is_friend as isFriend
+        FROM
+            fans f
+        LEFT JOIN
+            users u
+        ON
+            f.fan_id = u.id
+        WHERE
+            f.vlogger_id = #{paramMap.userId}
+        ORDER BY
+            u.nickname ASC
     </select>
 </mapper>

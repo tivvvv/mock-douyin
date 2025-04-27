@@ -1,6 +1,7 @@
 package com.tiv.service;
 
 import com.tiv.common.result.PagedResult;
+import com.tiv.model.vo.FanVO;
 import com.tiv.model.vo.VloggerVO;
 
 public interface FanService {
@@ -39,4 +40,15 @@ public interface FanService {
      * @return
      */
     PagedResult<VloggerVO> queryFollowList(String userId, Integer page, Integer pageSize);
+
+    /**
+     * 查询粉丝列表
+     *
+     * @param userId
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    PagedResult<FanVO> queryFanList(String userId, Integer page, Integer pageSize);
+
 }

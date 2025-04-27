@@ -6,6 +6,7 @@ import com.tiv.common.result.PagedResult;
 import com.tiv.mapper.FansMapper;
 import com.tiv.mapper.FansMapperCustom;
 import com.tiv.model.pojo.Fans;
+import com.tiv.model.vo.FanVO;
 import com.tiv.model.vo.VloggerVO;
 import com.tiv.service.FanService;
 import com.tiv.service.base.BaseInfoProperties;
@@ -90,6 +91,17 @@ public class FanServiceImpl extends BaseInfoProperties implements FanService {
         List<VloggerVO> follows = fansMapperCustom.getFollows(map);
 
         return buildPagedResult(follows, page);
+    }
+
+    @Override
+    public PagedResult<FanVO> queryFanList(String userId, Integer page, Integer pageSize) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        PageHelper.startPage(page, pageSize);
+        List<FanVO> fans = fansMapperCustom.getFans(map);
+
+        return buildPagedResult(fans, page);
     }
 
     private Fans queryFanRelationship(String fanId, String vloggerId) {
