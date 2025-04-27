@@ -1,9 +1,14 @@
 package com.tiv.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.tiv.common.enums.YesOrNoEnum;
+import com.tiv.common.result.PagedResult;
 import com.tiv.mapper.FansMapper;
+import com.tiv.mapper.FansMapperCustom;
 import com.tiv.model.pojo.Fans;
+import com.tiv.model.vo.VloggerVO;
 import com.tiv.service.FanService;
+import com.tiv.service.base.BaseInfoProperties;
 import com.tiv.service.utils.RedisUtil;
 import com.tiv.service.utils.idworker.Sid;
 import org.slf4j.Logger;
@@ -14,10 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
-public class FanServiceImpl implements FanService {
+public class FanServiceImpl extends BaseInfoProperties implements FanService {
 
     private static final Logger log = LoggerFactory.getLogger(FanServiceImpl.class);
     @Autowired
@@ -27,6 +34,8 @@ public class FanServiceImpl implements FanService {
     private Sid sid;
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    private FansMapperCustom fansMapperCustom;
 
     @Override
     public void doFollow(String userId, String vloggerId) {
@@ -70,6 +79,17 @@ public class FanServiceImpl implements FanService {
     @Override
     public boolean queryFollowStatus(String userId, String vloggerId) {
         return queryFanRelationship(userId, vloggerId) != null;
+    }
+
+    @Override
+    public PagedResult<VloggerVO> queryFollowList(String userId, Integer page, Integer pageSize) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        PageHelper.startPage(page, pageSize);
+        List<VloggerVO> follows = fansMapperCustom.getFollows(map);
+
+        return buildPagedResult(follows, page);
     }
 
     private Fans queryFanRelationship(String fanId, String vloggerId) {

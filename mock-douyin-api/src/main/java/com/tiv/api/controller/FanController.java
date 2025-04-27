@@ -75,4 +75,10 @@ public class FanController {
         return GraceJSONResult.ok(isFollow);
     }
 
+    @GetMapping("/queryFollowList")
+    public GraceJSONResult queryFollowList(@RequestParam String userId,
+                                           @RequestParam(defaultValue = "1") Integer page,
+                                           @RequestParam(defaultValue = "10") Integer pageSize) {
+        return GraceJSONResult.ok(fanService.queryFollowList(userId, page, pageSize));
+    }
 }

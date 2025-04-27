@@ -1,5 +1,8 @@
 package com.tiv.service;
 
+import com.tiv.common.result.PagedResult;
+import com.tiv.model.vo.VloggerVO;
+
 public interface FanService {
 
     /**
@@ -26,4 +29,14 @@ public interface FanService {
      * @return
      */
     boolean queryFollowStatus(String userId, String vloggerId);
+
+    /**
+     * 查询关注列表
+     *
+     * @param userId
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    PagedResult<VloggerVO> queryFollowList(String userId, Integer page, Integer pageSize);
 }
