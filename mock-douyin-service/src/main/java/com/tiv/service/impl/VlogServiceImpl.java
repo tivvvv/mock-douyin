@@ -3,9 +3,11 @@ package com.tiv.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.tiv.common.enums.YesOrNoEnum;
 import com.tiv.common.result.PagedResult;
+import com.tiv.mapper.LikeVlogsMapper;
 import com.tiv.mapper.VlogsMapper;
 import com.tiv.mapper.VlogsMapperCustom;
 import com.tiv.model.bo.VlogBO;
+import com.tiv.model.pojo.LikeVlogs;
 import com.tiv.model.pojo.Vlogs;
 import com.tiv.model.vo.IndexVlogVO;
 import com.tiv.service.VlogService;
@@ -32,6 +34,9 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
 
     @Autowired
     private VlogsMapperCustom vlogsMapperCustom;
+
+    @Autowired
+    private LikeVlogsMapper likeVlogsMapper;
 
     @Autowired
     private Sid sid;
@@ -106,5 +111,16 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
         PageHelper.startPage(page, pageSize);
         List<Vlogs> vlogs = vlogsMapper.selectByExample(example);
         return buildPagedResult(vlogs, page);
+    }
+
+    @Override
+    public void likeVlog(String userId, String vlogId) {
+        String likeId = sid.nextShort();
+
+        LikeVlogs likeVlogs = LikeVlogs.builder()
+                .id(likeId)
+                .vlogId(vlogId)
+                .userId(userId).build();
+        likeVlogsMapper.insert(likeVlogs);
     }
 }

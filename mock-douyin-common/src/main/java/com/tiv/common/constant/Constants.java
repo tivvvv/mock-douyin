@@ -21,7 +21,11 @@ public interface Constants {
 
     String MY_FANS_COUNTS_PREFIX = "my_fans_counts_";
 
+    String VLOG_LIKE_COUNTS_PREFIX = "vlog_like_counts_";
+
     String FAN_REL_VLOGGER_PREFIX = "fan_rel_vlogger_";
+
+    String USER_LIKE_VLOG_PREFIX = "user_like_vlog_";
 
     String UPDATE_UID_PREFIX = "update_uid_";
 

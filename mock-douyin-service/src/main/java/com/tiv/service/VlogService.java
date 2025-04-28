@@ -52,4 +52,12 @@ public interface VlogService {
      * @return
      */
     PagedResult<Vlogs> queryMyVlogList(String userId, Integer isPrivate, Integer page, Integer pageSize);
+
+    /**
+     * 点赞视频
+     *
+     * @param userId
+     * @param vlogId
+     */
+    void likeVlog(String userId, String vlogId);
 }

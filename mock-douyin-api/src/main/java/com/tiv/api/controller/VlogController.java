@@ -1,8 +1,10 @@
 package com.tiv.api.controller;
 
+import com.tiv.common.constant.Constants;
 import com.tiv.common.result.GraceJSONResult;
 import com.tiv.model.bo.VlogBO;
 import com.tiv.service.VlogService;
+import com.tiv.service.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class VlogController {
 
     @Autowired
     private VlogService vlogService;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @PostMapping("/publish")
     public GraceJSONResult publish(@RequestBody VlogBO vlogBO) {
@@ -44,12 +48,24 @@ public class VlogController {
         return GraceJSONResult.ok();
     }
 
-    @GetMapping()
+    @GetMapping("/myVlogList")
     public GraceJSONResult myVlogList(@RequestParam String userId,
                                       @RequestParam Integer isPrivate,
                                       @RequestParam(defaultValue = "1") Integer page,
                                       @RequestParam(defaultValue = "10") Integer pageSize) {
         return GraceJSONResult.ok(vlogService.queryMyVlogList(userId, isPrivate, page, pageSize));
     }
+
+    @PostMapping("/like")
+    public GraceJSONResult like(@RequestParam String userId,
+                                @RequestParam String vlogId,
+                                @RequestParam String vloggerId) {
+        vlogService.likeVlog(userId, vlogId);
+        redisUtil.increment(Constants.MY_LIKES_COUNTS_PREFIX + vloggerId, 1);
+        redisUtil.increment(Constants.VLOG_LIKE_COUNTS_PREFIX + vlogId, 1);
+        redisUtil.set(Constants.USER_LIKE_VLOG_PREFIX + userId + ":" + vlogId, "1");
+        return GraceJSONResult.ok();
+    }
+
 
 }
