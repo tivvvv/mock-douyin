@@ -17,12 +17,13 @@ public interface VlogService {
     /**
      * 分页查询短视频列表
      *
+     * @param userId
      * @param search
      * @param page
      * @param pageSize
      * @return
      */
-    PagedResult<IndexVlogVO> getIndexVlogList(String search, Integer page, Integer pageSize);
+    PagedResult<IndexVlogVO> getIndexVlogList(String userId, String search, Integer page, Integer pageSize);
 
     /**
      * 查询短视频详情

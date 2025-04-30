@@ -1,6 +1,7 @@
 package com.tiv.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.tiv.common.constant.Constants;
 import com.tiv.common.enums.YesOrNoEnum;
 import com.tiv.common.result.PagedResult;
 import com.tiv.mapper.LikeVlogsMapper;
@@ -12,6 +13,7 @@ import com.tiv.model.pojo.Vlogs;
 import com.tiv.model.vo.IndexVlogVO;
 import com.tiv.service.VlogService;
 import com.tiv.service.base.BaseInfoProperties;
+import com.tiv.service.utils.RedisUtil;
 import com.tiv.service.utils.idworker.Sid;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -40,6 +42,8 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
 
     @Autowired
     private Sid sid;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Transactional
     @Override
@@ -62,14 +66,23 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
     }
 
     @Override
-    public PagedResult<IndexVlogVO> getIndexVlogList(String search, Integer page, Integer pageSize) {
+    public PagedResult<IndexVlogVO> getIndexVlogList(String userId, String search, Integer page, Integer pageSize) {
         PageHelper.startPage(page, pageSize);
         Map<String, Object> map = new HashMap<>();
         if (StringUtils.isNotBlank(search)) {
             map.put("search", search);
         }
         List<IndexVlogVO> list = vlogsMapperCustom.getIndexVlogList(map);
+        for (IndexVlogVO vlog : list) {
+            String vlogId = vlog.getVlogId();
+            vlog.setIsLiked(isVlogLiked(userId, vlogId));
+        }
         return buildPagedResult(list, page);
+    }
+
+    private boolean isVlogLiked(String userId, String vlogId) {
+        String s = redisUtil.get(Constants.USER_LIKE_VLOG_PREFIX + userId + ":" + vlogId);
+        return StringUtils.isNotBlank(s) && "1".equalsIgnoreCase(s);
     }
 
     @Override

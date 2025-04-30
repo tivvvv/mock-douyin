@@ -22,5 +22,6 @@ public class IndexVlogVO {
     private Integer likeCounts;
     private Integer commentsCounts;
     private Integer isPrivate;
-    private boolean isPlay = false;
+    private Boolean isPlay = false;
+    private Boolean isLiked = false;
 }
