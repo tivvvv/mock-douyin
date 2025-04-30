@@ -75,8 +75,12 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
         List<IndexVlogVO> list = vlogsMapperCustom.getIndexVlogList(map);
         for (IndexVlogVO vlog : list) {
             String vlogId = vlog.getVlogId();
+            // 视频是否已被当前用户点赞
             vlog.setIsLiked(isVlogLiked(userId, vlogId));
+            // 视频总点赞数
+            vlog.setLikeCounts(getVlogLikeCounts(vlogId));
         }
+
         return buildPagedResult(list, page);
     }
 
@@ -143,5 +147,11 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
                 .vlogId(vlogId)
                 .userId(userId).build();
         likeVlogsMapper.delete(likeVlogs);
+    }
+
+    @Override
+    public Integer getVlogLikeCounts(String vlogId) {
+        String countsStr = redisUtil.get(Constants.VLOG_LIKE_COUNTS_PREFIX + vlogId);
+        return StringUtils.isBlank(countsStr) ? 0 : Integer.parseInt(countsStr);
     }
 }

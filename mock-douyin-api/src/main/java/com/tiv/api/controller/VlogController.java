@@ -79,4 +79,9 @@ public class VlogController {
         return GraceJSONResult.ok();
     }
 
+    @GetMapping("/vlogLikeCounts")
+    public GraceJSONResult vlogLikeCounts(@RequestParam String vlogId) {
+        return GraceJSONResult.ok(vlogService.getVlogLikeCounts(vlogId));
+    }
+
 }
