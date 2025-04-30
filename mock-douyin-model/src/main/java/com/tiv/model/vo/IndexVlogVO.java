@@ -24,4 +24,5 @@ public class IndexVlogVO {
     private Integer isPrivate;
     private Boolean isPlay = false;
     private Boolean isLiked = false;
+    private Boolean isVloggerFollowed = false;
 }

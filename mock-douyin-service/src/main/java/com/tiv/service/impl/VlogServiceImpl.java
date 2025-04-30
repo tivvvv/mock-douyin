@@ -11,6 +11,7 @@ import com.tiv.model.bo.VlogBO;
 import com.tiv.model.pojo.LikeVlogs;
 import com.tiv.model.pojo.Vlogs;
 import com.tiv.model.vo.IndexVlogVO;
+import com.tiv.service.FanService;
 import com.tiv.service.VlogService;
 import com.tiv.service.base.BaseInfoProperties;
 import com.tiv.service.utils.RedisUtil;
@@ -39,6 +40,9 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
 
     @Autowired
     private LikeVlogsMapper likeVlogsMapper;
+
+    @Autowired
+    private FanService fanService;
 
     @Autowired
     private Sid sid;
@@ -75,6 +79,8 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
         List<IndexVlogVO> list = vlogsMapperCustom.getIndexVlogList(map);
         for (IndexVlogVO vlog : list) {
             String vlogId = vlog.getVlogId();
+
+            vlog.setIsVloggerFollowed(fanService.queryFollowStatus(userId, vlog.getVloggerId()));
             // 视频是否已被当前用户点赞
             vlog.setIsLiked(isVlogLiked(userId, vlogId));
             // 视频总点赞数
@@ -163,6 +169,27 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
         map.put("userId", userId);
 
         List<IndexVlogVO> likedVlogList = vlogsMapperCustom.getLikedVlogList(map);
+        return buildPagedResult(likedVlogList, page);
+    }
+
+    @Override
+    public PagedResult<IndexVlogVO> getFollowedVlogList(String userId, Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        List<IndexVlogVO> likedVlogList = vlogsMapperCustom.getFollowedVlogList(map);
+
+        for (IndexVlogVO vlog : likedVlogList) {
+            String vlogId = vlog.getVlogId();
+
+            vlog.setIsVloggerFollowed(true);
+            // 视频是否已被当前用户点赞
+            vlog.setIsLiked(isVlogLiked(userId, vlogId));
+            // 视频总点赞数
+            vlog.setLikeCounts(getVlogLikeCounts(vlogId));
+        }
         return buildPagedResult(likedVlogList, page);
     }
 }

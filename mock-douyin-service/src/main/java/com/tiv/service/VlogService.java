@@ -87,4 +87,15 @@ public interface VlogService {
      * @return
      */
     PagedResult<IndexVlogVO> getLikedVlogList(String userId, Integer page, Integer pageSize);
+
+    /**
+     * 查询用户关注博主发布的短视频
+     *
+     * @param userId
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    PagedResult<IndexVlogVO> getFollowedVlogList(String userId, Integer page, Integer pageSize);
+
 }
