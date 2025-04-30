@@ -67,5 +67,15 @@ public class VlogController {
         return GraceJSONResult.ok();
     }
 
+    @PostMapping("/unlike")
+    public GraceJSONResult unlike(@RequestParam String userId,
+                                  @RequestParam String vlogId,
+                                  @RequestParam String vloggerId) {
+        vlogService.unlikeVlog(userId, vlogId);
+        redisUtil.decrement(Constants.MY_LIKES_COUNTS_PREFIX + vloggerId, 1);
+        redisUtil.decrement(Constants.VLOG_LIKE_COUNTS_PREFIX + vlogId, 1);
+        redisUtil.del(Constants.USER_LIKE_VLOG_PREFIX + userId + ":" + vlogId);
+        return GraceJSONResult.ok();
+    }
 
 }

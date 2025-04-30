@@ -123,4 +123,12 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
                 .userId(userId).build();
         likeVlogsMapper.insert(likeVlogs);
     }
+
+    @Override
+    public void unlikeVlog(String userId, String vlogId) {
+        LikeVlogs likeVlogs = LikeVlogs.builder()
+                .vlogId(vlogId)
+                .userId(userId).build();
+        likeVlogsMapper.delete(likeVlogs);
+    }
 }
