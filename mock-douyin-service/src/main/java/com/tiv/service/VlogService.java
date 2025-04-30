@@ -77,4 +77,14 @@ public interface VlogService {
      * @return
      */
     Integer getVlogLikeCounts(String vlogId);
+
+    /**
+     * 查询用户点赞的短视频
+     *
+     * @param userId
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    PagedResult<IndexVlogVO> getLikedVlogList(String userId, Integer page, Integer pageSize);
 }

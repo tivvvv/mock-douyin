@@ -154,4 +154,15 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
         String countsStr = redisUtil.get(Constants.VLOG_LIKE_COUNTS_PREFIX + vlogId);
         return StringUtils.isBlank(countsStr) ? 0 : Integer.parseInt(countsStr);
     }
+
+    @Override
+    public PagedResult<IndexVlogVO> getLikedVlogList(String userId, Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        List<IndexVlogVO> likedVlogList = vlogsMapperCustom.getLikedVlogList(map);
+        return buildPagedResult(likedVlogList, page);
+    }
 }

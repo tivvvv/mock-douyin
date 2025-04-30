@@ -84,4 +84,11 @@ public class VlogController {
         return GraceJSONResult.ok(vlogService.getVlogLikeCounts(vlogId));
     }
 
+    @GetMapping("/likedVlogs")
+    public GraceJSONResult likedVlogList(@RequestParam String userId,
+                                         @RequestParam(defaultValue = "1") Integer page,
+                                         @RequestParam(defaultValue = "10") Integer pageSize) {
+        return GraceJSONResult.ok(vlogService.getLikedVlogList(userId, page, pageSize));
+    }
+
 }
