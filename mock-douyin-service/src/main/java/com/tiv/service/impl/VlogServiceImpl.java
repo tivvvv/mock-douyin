@@ -192,4 +192,25 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
         }
         return buildPagedResult(likedVlogList, page);
     }
+
+    @Override
+    public PagedResult<IndexVlogVO> getFriendsVlogList(String userId, Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        List<IndexVlogVO> likedVlogList = vlogsMapperCustom.getFriendsVlogList(map);
+
+        for (IndexVlogVO vlog : likedVlogList) {
+            String vlogId = vlog.getVlogId();
+
+            vlog.setIsVloggerFollowed(true);
+            // 视频是否已被当前用户点赞
+            vlog.setIsLiked(isVlogLiked(userId, vlogId));
+            // 视频总点赞数
+            vlog.setLikeCounts(getVlogLikeCounts(vlogId));
+        }
+        return buildPagedResult(likedVlogList, page);
+    }
 }

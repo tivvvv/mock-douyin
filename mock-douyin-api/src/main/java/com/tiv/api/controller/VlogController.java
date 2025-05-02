@@ -98,4 +98,11 @@ public class VlogController {
         return GraceJSONResult.ok(vlogService.getFollowedVlogList(userId, page, pageSize));
     }
 
+    @GetMapping("/friendsVlogs")
+    public GraceJSONResult friendsVlogList(@RequestParam String userId,
+                                           @RequestParam(defaultValue = "1") Integer page,
+                                           @RequestParam(defaultValue = "10") Integer pageSize) {
+        return GraceJSONResult.ok(vlogService.getFriendsVlogList(userId, page, pageSize));
+    }
+
 }

@@ -98,4 +98,14 @@ public interface VlogService {
      */
     PagedResult<IndexVlogVO> getFollowedVlogList(String userId, Integer page, Integer pageSize);
 
+    /**
+     * 查询朋友发布的短视频
+     *
+     * @param userId
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    PagedResult<IndexVlogVO> getFriendsVlogList(String userId, Integer page, Integer pageSize);
+
 }
