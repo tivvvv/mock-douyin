@@ -103,7 +103,14 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
         List<IndexVlogVO> list = vlogsMapperCustom.getVlogDetailById(map);
 
         if (!CollectionUtils.isEmpty(list)) {
-            return list.get(0);
+            IndexVlogVO indexVlogVO = list.get(0);
+
+            indexVlogVO.setIsVloggerFollowed(true);
+            // 视频是否已被当前用户点赞
+            indexVlogVO.setIsLiked(isVlogLiked(userId, vlogId));
+            // 视频总点赞数
+            indexVlogVO.setLikeCounts(getVlogLikeCounts(vlogId));
+            return indexVlogVO;
         }
 
         return null;
